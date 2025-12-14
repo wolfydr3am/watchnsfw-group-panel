@@ -1,0 +1,213 @@
+/* Define CSS variables for light and dark mode */
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --form-background-color: #fff;
+    --input-border-color: #ccc;
+    --button-background-color: #53ff50; /* Vibrant Green */
+    --button-hover-background-color: #37ff29d0;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+    --highlight-color: #53ff50; /* Used for emphasis */
+    --legend-color: #007bff; /* Blue for grouping titles */
+}
+
+/* Base and Typography */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.highlight {
+    color: var(--highlight-color);
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1em;
+    color: #666;
+    margin-top: 0;
+}
+
+/* Form and Inputs */
+.main-form {
+    padding: 30px;
+    background: var(--form-background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.main-form:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-group { 
+    margin-bottom: 25px; 
+    padding: 15px; 
+    border: 1px solid var(--input-border-color); 
+    border-radius: var(--border-radius); 
+}
+
+legend {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--legend-color);
+    padding: 0 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px; /* Slightly smaller radius for inputs */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-size: 1em;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 3px rgba(83, 255, 80, 0.2); /* Light green glow */
+    outline: none;
+}
+
+textarea[name="bulkText"] {
+    min-height: 120px;
+    /* Use a clear, fixed-width font for link input */
+    font-family: Consolas, 'Courier New', monospace; 
+    resize: vertical;
+}
+
+.help-text {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding-left: 5px;
+}
+
+/* Buttons */
+button {
+    background-color: var(--button-background-color);
+    color: #000; /* Black text on green background for contrast */
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--button-hover-background-color);
+    transform: translateY(-2px);
+}
+
+/* Ad Options */
+.ad-type {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.ad-options {
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+.ad-options label {
+    font-weight: normal;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.ad-options input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 0;
+    transform: scale(1.1);
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1e1e1e;
+        --text-color: #e0e0e0;
+        --form-background-color: #2c2c2c;
+        --input-border-color: #444;
+        --button-background-color: #53ff50;
+        --button-hover-background-color: #37ff29d0;
+        --legend-color: #8bb3ff; /* Lighter blue for dark mode */
+    }
+
+    .subtitle {
+        color: #b0b0b0;
+    }
+    
+    button {
+        color: #000; /* Ensure black text on bright green */
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        align-items: flex-start; /* Start stacking from top on small screens */
+    }
+
+    .main-form {
+        padding: 15px;
+    }
+    
+    .form-group {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    input, select, button, textarea {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+}

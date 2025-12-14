@@ -1,0 +1,61 @@
+{
+    "WatchNSFW": {
+        "Status": true,
+        "Telegram": true,
+        "Group": "-1002166006414",
+        "name": "watchnsfw",
+        "token": "4fd3320e831fd9d7ad80aaa02df71c158a1e137a765fd80e1988568d8514a11e",
+        "linkvertiseId": "1227907",
+        "domain": "https://watchnsfw.co/s?",
+        "background": "https://i.ibb.co/ggtQWXH/adbackground.png",
+        "logo": "https://i.ibb.co/5TNfVks/Watch-NSFW-Static-Logo.png",
+        "template": "Last Step : - %shortUrl%\n\n**Join us for more amazing content at here:**\n Discord : - https://discord.gg/YjjmQymc\n Telegram : - https://t.me/WatchNSFWBridge\n\n**Follow me:**\nInstagram : - [Click to Visit](https://www.instagram.com/itzyourbread/)",
+        "tracker": "6d568f31f825fbc0cb2de58a004b3bf1",
+        "trackerGet": false,
+        "DiscordPremiumWebhook": "https://discord.com/api/webhooks/1416159460174467154/5KTI5-zN7PsKMZSh9jkYfniTk3jUYJqCDQji_kspwIcUsPyuAoW8F3U2CW5MDOxwBx1I",
+        "DiscordChannels": {
+            "OF-Models": "https://discord.com/api/webhooks/1417070803975016448/tiojzQ0wKSq67YKwNpoFzr7NaSY6HMXeSFhpOK1b4P_mQ2LVQkgLsNrlRCe-yHU-j5RY",
+            "State-Snap": "https://discord.com/api/webhooks/1416160737859993790/MmYLi-T0RpP3Iu449NWQosxJmWVkk_lPNu1c1EP2VFo02P4FGdD0amCn0o65jojfAUD9",
+            "Collection": "https://discord.com/api/webhooks/1416160876720951508/uZSex3ppkCWYXlfmMW-RnJa_WHL-wfA69xfNvcbKLkZUVjCX2lsWCtMhdazeCtAQ5SyN",
+            "Amateur": "https://discord.com/api/webhooks/1416160626073665709/qIPQKZsNKeqqjw1ZCFXLZeU2QlFV8BHHbXrjBlyMaehsdCoWp1OofIA_9-QdwWJKPTD5",
+            "Leaks-Vids": "https://discord.com/api/webhooks/1416160465679024138/yH2OYKZZGxIN-A8ZWvz0eVscIbW9It-nE_sSF2BFBOuinCWsJWRJiFVOsnLJ-klq2j9d"
+        },
+        "TelegramTopics": {
+            "OF-Models": 27,
+            "State-Snap": 24,
+            "Collection": 26,
+            "Amateur": 23,
+            "Leaks-Vids": 22,
+            "TeraBox": 3746
+        }
+    },
+    "NSFW-NUDE": {
+        "Status": true,
+        "Telegram": false,
+        "Group": "",
+        "name": "nude-nsfw",
+        "token": "4fd3320e831fd9d7ad80aaa02df71c158a1e137a765fd80e1988568d8514a11e",
+        "linkvertiseId": "1185754",
+        "domain": "https://watchnsfw.co/s?",
+        "background": "https://i.ibb.co/ggtQWXH/adbackground.png",
+        "logo": "https://i.ibb.co/5TNfVks/Watch-NSFW-Static-Logo.png",
+        "template": "Last Step : - %shortUrl%\n\n**Join us for more amazing content at here:**\n Discord : - hhttps://discord.gg/YjjmQymc\n Telegram : - https://t.me/WATCHNSFWPACK\n\n**Follow me:**\nInstagram : - [Click to Visit](https://www.instagram.com/itzyourbread/)",
+        "tracker": "6d568f31f825fbc0cb2de58a004b3bf1",
+        "trackerGet": false,
+        "DiscordPremiumWebhook": "https://discord.com/api/webhooks/1313072718740066317/7DbXK_epTezlCTh4bE3cm2Qq_3NkfV8GNydYy0aWvIYyz4paQ4xWtzpc4dhMf28OEAfV",
+        "DiscordChannels": {
+            "OF-Models": "https://discord.com/api/webhooks/1313073093161390080/z600dzVN9e5auRsU867HZPZvZ3_BiaOsf8ybZnsbzPbFkhXVzzg3FqQ5MAjxKYwSzS2S",
+            "State-Snap": "https://discord.com/api/webhooks/1313073237432864778/7oggzguqOPu-2AgKNPb2U1TyJ_Y-vhO2fYJhd3a-7Ep1IV3uD6Gvu6jJ0wS7BuemUPbD",
+            "Collection": "https://discord.com/api/webhooks/1313073331578343505/RwmuvlcSxJTe0QdNy3P5ADIhtr_ebKaJmCLRs6sfUHuqAk9GgCC7NN8q7-LHzYsc4fLx",
+            "Amateur": "https://discord.com/api/webhooks/1313073484087169066/PuP-m7s6mTI-jKC3y_4e8NK9kGhkg6xjz1bsjMpox_Ur2CQDCoM5Wuu4m3lbA7C-45ao",
+            "Leaks-Vids": "https://discord.com/api/webhooks/1313073542870335558/35jhI6IjkMoMNjS6-E0kzxXMt4PaR1ReaSQ3vIye71bytiNuhWVdeVhW9LFRWg9szj_m"
+        },
+        "TelegramTopics": {
+            "OF-Models": 0,
+            "State-Snap": 0,
+            "Collection": 0,
+            "Amateur": 0,
+            "Leaks-Vids": 0
+        }
+    }
+}

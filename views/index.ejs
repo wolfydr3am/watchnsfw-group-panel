@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R.I.Y.A 2.0 | Smart Multi-Channel Poster</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .hidden { display: none !important; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="highlight">R.I.Y.A</span> NSFW 2.0</h1>
+            <p class="subtitle">Multi-Channel Bulk Processor</p>
+        </header>
+
+        <form action="/process-bulk" method="POST" enctype="multipart/form-data" class="main-form" id="mainForm">
+            
+            <fieldset class="form-group">
+                <legend>1. 🎯 Channel Selection</legend>
+
+                <label for="server-bulk">Target Server(s):</label>
+                <select name="server" id="server-bulk" required>
+                    <option value="All">All Active Servers</option>
+                    <% servers.forEach(function(server) { %>
+                    <option value="<%= server %>"><%= server %></option>
+                    <% }); %>
+                </select>
+
+                <label for="channel">Posting Channel / Mode:</label>
+                <select name="channel" id="channel" required onchange="toggleFormMode()">
+                    <option value="OF-Models">OF-Models (Manual Photo + Rentry Scrape)</option>
+                    <option value="TeraBox">TeraBox (Manual Photo + Manual Data)</option>
+                    <option value="Collection">Collection (Manual Photo + Manual Data)</option>
+                    <option value="State-Snap">State-Snap (Random Photo + Label)</option>
+                    <option value="Leaks-Vids">Leaks-Vids (Random Photo + Label)</option>
+                    <option value="Amateur">Amateur (Random Photo + Label)</option>
+                </select>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <legend>2. 🔗 Shortening & Ads</legend>
+
+                <div class="ad-type">
+                    <label>Monetization Type(s):</label>
+                    <div class="ad-options">
+                        <label><input type="checkbox" name="AdType[]" value="linkvertise" checked> Linkvertise</label>
+                        <label><input type="checkbox" name="AdType[]" value="admaven" > AdMaven</label>
+                    </div>
+                </div>
+
+                <label for="selectType-bulk">Shortening Method:</label>
+                <select name="selectType">
+                    <option value="2of2">2 of 2 (Paster Landing Page)</option>
+                    <option value="1of1">1 of 1 (Direct Link)</option>
+                </select>
+            </fieldset>
+
+            <fieldset class="form-group input-group">
+                <legend>3. 📝 Bulk Data Input & Image</legend>
+                
+                <div id="labelContainer" class="form-field hidden">
+                    <label for="textLabeling">Overlay Label (Sets Title & Image Overlay):</label>
+                    <select name="textLabeling" id="textLabeling"></select>
+                    <p class="help-text" style="color: #4db6ac;">A random image will be picked from the backend for this label.</p>
+                </div>
+                
+                <label for="bulkText" id="inputLabel">Input Links:</label>
+                <textarea name="bulkText" id="bulkText" required></textarea>
+                <p class="help-text" id="helpText"></p>
+                
+                <div class="form-field image-upload-group hidden" id="imageUploadContainer">
+                    <label for="image-bulk">Upload **ONE** Image:</label>
+                    <input type="file" name="image" id="image-bulk" accept="image/*">
+                    <p class="help-text" style="color: #4db6ac;">The image will be used for every link in this batch.</p>
+                </div>
+
+            </fieldset>
+
+            <button type="submit" id="submitBtn">🚀 Start Processing Batch</button>
+        </form>
+    </div>
+
+    <script>
+        // Data source for labels (can be moved to a separate file later)
+        const channelLabels = {
+            'State-Snap': ['statewinz-girls-pack', 'snapwinz-girls-pack', 'real-t33ns-l34ks', "girls-got-l34ked", "young-t33ns-l34ks", "bulk-new-snapwinz", "girlfriends-collection", "h!jabi-girls-pack"],
+            'Amateur': ['amateur-l34ks', 'asian-homemade-pack', 'l3gal-t33ns-homemade-pack'],
+            'Leaks-Vids': ['new-video-leaks', 'viral-leak-pack'],
+            // Default for non-listed random channels
+            'default': ['default-label'] 
+        };
+
+        function toggleFormMode() {
+            const channel = document.getElementById('channel').value;
+            const labelContainer = document.getElementById('labelContainer');
+            const imageUploadContainer = document.getElementById('imageUploadContainer');
+            const imageInput = document.getElementById('image-bulk');
+            const textLabelingSelect = document.getElementById('textLabeling');
+            const inputLabel = document.getElementById('inputLabel');
+            const helpText = document.getElementById('helpText');
+            const bulkText = document.getElementById('bulkText');
+
+            const isManualPhoto = (channel === 'OF-Models' || channel === 'TeraBox' || channel === 'Collection');
+            const isScrape = (channel === 'OF-Models');
+
+            // 1. Toggle Containers
+            labelContainer.classList.toggle('hidden', isManualPhoto);
+            imageUploadContainer.classList.toggle('hidden', !isManualPhoto);
+            imageInput.required = isManualPhoto;
+
+            // 2. Set Input/Help Text based on mode
+            if (isManualPhoto) {
+                // Manual Photo (OF-Models, TeraBox, Collection)
+                
+                if (isScrape) {
+                    inputLabel.innerText = "Paste Rentry URLs:";
+                    helpText.innerText = "Mode: Auto-Scrape. Input Rentry URLs (1 per line).";
+                    bulkText.placeholder = "https://rentry.co/model1\nhttps://rentry.co/model2";
+                } else if (channel === 'Collection') {
+                    inputLabel.innerText = "Collection Links:";
+                    helpText.innerText = "Mode: Collection. Input Title and Link pairs (2 lines per entry).";
+                    bulkText.placeholder = "Model Title 1\nhttps://link-to-collection-1\n\nModel Title 2\nhttps://link-to-collection-2";
+                } else { // TeraBox
+                    inputLabel.innerText = "TeraBox Links:";
+                    helpText.innerText = "Mode: TeraBox. Input Title and Link pairs (2 lines per entry).";
+                    bulkText.placeholder = "Model Title 1\nhttps://terabox.com/s/123...\n\nModel Title 2\nhttps://terabox.com/s/abc...";
+                }
+
+            } else {
+                // Auto-Image Channels (State-Snap, Leaks-Vids, Amateur)
+                inputLabel.innerText = "Paste Mega/Direct Links:";
+                helpText.innerText = "Mode: Random Image. Input link pairs (2 lines per entry). Title is taken from the label above.";
+                bulkText.placeholder = "Link 1\nLink 2\nLink 3...";
+                
+                // Populate Labels
+                populateLabels(channel, textLabelingSelect);
+            }
+        }
+
+        function populateLabels(channel, selectElement) {
+            selectElement.innerHTML = '';
+            const options = channelLabels[channel] || channelLabels['default'];
+
+            options.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.textContent = opt.replace(/-/g, ' ').toUpperCase();
+                selectElement.appendChild(el);
+            });
+        }
+
+        // Run on load to set initial state
+        document.addEventListener('DOMContentLoaded', toggleFormMode);
+    </script>
+</body>
+</html>
