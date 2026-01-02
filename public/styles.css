@@ -1,18 +1,32 @@
-/* Define CSS variables for light and dark mode */
+/* -------------------------------------------------------------------------- */
+/* THEME VARIABLES (LIGHT + DARK SYNCED)                                       */
+/* -------------------------------------------------------------------------- */
+
 :root {
     --background-color: #f4f4f4;
     --text-color: #333;
-    --form-background-color: #fff;
-    --input-border-color: #ccc;
-    --button-background-color: #53ff50; /* Vibrant Green */
+    --form-background-color: #ffffff;
+    --input-border-color: #cccccc;
+
+    --button-background-color: #53ff50;
     --button-hover-background-color: #37ff29d0;
+
+    --highlight-color: #53ff50;
+    --legend-color: #007bff;
+
     --border-radius: 12px;
-    --box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow */
-    --highlight-color: #53ff50; /* Used for emphasis */
-    --legend-color: #007bff; /* Blue for grouping titles */
+    --input-radius: 8px;
+
+    --box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    --modal-overlay-bg: rgba(0, 0, 0, 0.6);
 }
 
-/* Base and Typography */
+/* -------------------------------------------------------------------------- */
+/* BASE + TYPOGRAPHY                                                          */
+/* -------------------------------------------------------------------------- */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
@@ -26,8 +40,8 @@ body {
 }
 
 .container {
-    max-width: 600px;
     width: 100%;
+    max-width: 600px;
 }
 
 header {
@@ -37,7 +51,7 @@ header {
 
 h1 {
     font-size: 2.2em;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     letter-spacing: 1px;
 }
 
@@ -49,35 +63,42 @@ h1 {
 .subtitle {
     font-size: 1em;
     color: #666;
-    margin-top: 0;
+    margin: 0;
 }
 
-/* Form and Inputs */
+/* -------------------------------------------------------------------------- */
+/* FORM CONTAINER                                                             */
+/* -------------------------------------------------------------------------- */
+
 .main-form {
-    padding: 30px;
     background: var(--form-background-color);
+    padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease;
 }
 
 .main-form:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow-hover);
 }
 
-.form-group { 
-    margin-bottom: 25px; 
-    padding: 15px; 
-    border: 1px solid var(--input-border-color); 
-    border-radius: var(--border-radius); 
+.form-group {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
 }
 
 legend {
-    font-size: 1.1em;
+    font-size: 1.05em;
     font-weight: bold;
     color: var(--legend-color);
     padding: 0 10px;
 }
+
+/* -------------------------------------------------------------------------- */
+/* LABELS + INPUTS                                                            */
+/* -------------------------------------------------------------------------- */
 
 label {
     display: block;
@@ -86,27 +107,30 @@ label {
     font-size: 0.95em;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid var(--input-border-color);
-    border-radius: 8px; /* Slightly smaller radius for inputs */
+    border-radius: var(--input-radius);
     box-sizing: border-box;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     font-size: 1em;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
     border-color: var(--highlight-color);
-    box-shadow: 0 0 0 3px rgba(83, 255, 80, 0.2); /* Light green glow */
+    box-shadow: 0 0 0 3px rgba(83, 255, 80, 0.2);
     outline: none;
 }
 
 textarea[name="bulkText"] {
     min-height: 120px;
-    /* Use a clear, fixed-width font for link input */
-    font-family: Consolas, 'Courier New', monospace; 
+    font-family: Consolas, 'Courier New', monospace;
     resize: vertical;
 }
 
@@ -115,21 +139,24 @@ textarea[name="bulkText"] {
     color: #888;
     margin-top: -10px;
     margin-bottom: 15px;
-    padding-left: 5px;
+    padding-left: 4px;
 }
 
-/* Buttons */
+/* -------------------------------------------------------------------------- */
+/* BUTTONS                                                                    */
+/* -------------------------------------------------------------------------- */
+
 button {
-    background-color: var(--button-background-color);
-    color: #000; /* Black text on green background for contrast */
-    font-weight: bold;
+    width: 100%;
     padding: 15px;
     border: none;
     border-radius: var(--border-radius);
-    cursor: pointer;
-    width: 100%;
+    background-color: var(--button-background-color);
+    color: #000;
+    font-weight: bold;
     font-size: 1.1em;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
 button:hover {
@@ -137,17 +164,23 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Ad Options */
+button:active {
+    transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/* AD OPTIONS                                                                 */
+/* -------------------------------------------------------------------------- */
+
 .ad-type {
     margin-top: 10px;
     margin-bottom: 20px;
-    padding: 10px 0;
 }
 
 .ad-options {
     display: flex;
-    justify-content: flex-start;
     gap: 25px;
+    align-items: center;
 }
 
 .ad-options label {
@@ -156,58 +189,151 @@ button:hover {
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 0;
 }
 
 .ad-options input[type="checkbox"] {
     width: auto;
     margin-right: 8px;
-    margin-bottom: 0;
     transform: scale(1.1);
 }
 
-/* Dark Mode Styles */
+/* -------------------------------------------------------------------------- */
+/* MODAL (OF / TERABOX QUICK SWITCH)                                           */
+/* -------------------------------------------------------------------------- */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--modal-overlay-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal {
+    width: 92%;
+    max-width: 480px;
+    background: var(--form-background-color);
+    color: var(--text-color);
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+.modal h2 {
+    margin: 0 0 10px;
+    font-size: 1.3em;
+}
+
+.modal p {
+    margin-bottom: 18px;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.modal .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal .btn {
+    padding: 10px 14px;
+    font-size: 0.95em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal .btn-primary {
+    background: var(--button-background-color);
+    color: #000;
+}
+
+.modal .btn-secondary {
+    background: #e0e0e0;
+    color: #111;
+}
+
+.modal .btn:hover {
+    transform: translateY(-1px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* UTILITIES                                                                  */
+/* -------------------------------------------------------------------------- */
+
+.hidden {
+    display: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* DARK MODE                                                                  */
+/* -------------------------------------------------------------------------- */
+
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #1e1e1e;
         --text-color: #e0e0e0;
         --form-background-color: #2c2c2c;
         --input-border-color: #444;
-        --button-background-color: #53ff50;
-        --button-hover-background-color: #37ff29d0;
-        --legend-color: #8bb3ff; /* Lighter blue for dark mode */
+        --legend-color: #8bb3ff;
     }
 
     .subtitle {
         color: #b0b0b0;
     }
-    
-    button {
-        color: #000; /* Ensure black text on bright green */
+
+    .modal .btn-secondary {
+        background: #3a3a3a;
+        color: #fff;
     }
 }
 
-/* Responsive Styles */
+/* -------------------------------------------------------------------------- */
+/* RESPONSIVE                                                                 */
+/* -------------------------------------------------------------------------- */
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
-        align-items: flex-start; /* Start stacking from top on small screens */
+        align-items: flex-start;
     }
 
     .main-form {
-        padding: 15px;
+        padding: 16px;
     }
-    
+
     .form-group {
-        padding: 10px;
+        padding: 12px;
     }
 
     h1 {
         font-size: 1.8em;
     }
 
-    input, select, button, textarea {
+    input,
+    select,
+    textarea,
+    button {
         padding: 10px;
         font-size: 0.95em;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* ANIMATIONS                                                                 */
+/* -------------------------------------------------------------------------- */
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }

@@ -2,13 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>R.I.Y.A 2.0 | Smart Multi-Channel Poster</title>
     <link rel="stylesheet" href="/styles.css">
-    <style>
-        .hidden { display: none !important; }
-    </style>
 </head>
 
 <body>
@@ -33,8 +30,8 @@
 
                 <label for="channel">Posting Channel / Mode:</label>
                 <select name="channel" id="channel" required onchange="toggleFormMode()">
-                    <option value="TeraBox">TeraBox (Manual Photo + Manual Data)</option>
                     <option value="OF-Models">OF-Models (Manual Photo + Rentry Scrape)</option>
+                    <option value="TeraBox">TeraBox (Manual Photo + Manual Data)</option>
                     <option value="Collection">Collection (Manual Photo + Manual Data)</option>
                     <option value="State-Snap">State-Snap (Random Photo + Label)</option>
                     <option value="Leaks-Vids">Leaks-Vids (Random Photo + Label)</option>
@@ -42,26 +39,8 @@
                 </select>
             </fieldset>
 
-            <fieldset class="form-group">
-                <legend>2. 🔗 Shortening & Ads</legend>
-
-                <div class="ad-type">
-                    <label>Monetization Type(s):</label>
-                    <div class="ad-options">
-                        <label><input type="checkbox" name="AdType[]" value="linkvertise" > Linkvertise</label>
-                        <label><input type="checkbox" name="AdType[]" value="admaven" checked > AdMaven</label>
-                    </div>
-                </div>
-
-                <label for="selectType-bulk">Shortening Method:</label>
-                <select name="selectType">
-                    <option value="2of2">2 of 2 (Paster Landing Page)</option>
-                    <option value="1of1">1 of 1 (Direct Link)</option>
-                </select>
-            </fieldset>
-
             <fieldset class="form-group input-group">
-                <legend>3. 📝 Bulk Data Input & Image</legend>
+                <legend>2. 📝 Bulk Data Input & Image</legend>
                 
                 <div id="labelContainer" class="form-field hidden">
                     <label for="textLabeling">Overlay Label (Sets Title & Image Overlay):</label>
@@ -81,8 +60,39 @@
 
             </fieldset>
 
+            <fieldset class="form-group">
+                <legend>3. 🔗 Shortening & Ads</legend>
+
+                <div class="ad-type">
+                    <label>Monetization Type(s):</label>
+                    <div class="ad-options">
+                        <label><input type="checkbox" name="AdType[]" value="linkvertise" checked> Linkvertise</label>
+                        <label><input type="checkbox" name="AdType[]" value="admaven" > AdMaven</label>
+                    </div>
+                </div>
+
+                <label for="selectType-bulk">Shortening Method:</label>
+                <select name="selectType">
+                    <option value="2of2">2 of 2 (Paster Landing Page)</option>
+                    <option value="1of1">1 of 1 (Direct Link)</option>
+                </select>
+            </fieldset>
+
             <button type="submit" id="submitBtn">🚀 Start Processing Batch</button>
         </form>
+    </div>
+
+    <!-- Confirmation modal (hidden by default) -->
+    <div id="confirmModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <div class="modal" role="document">
+            <h2 id="confirmTitle">Choose processing mode</h2>
+            <p id="confirmDesc">This submission uses the same processing algorithm for both channels. Please choose whether to send this batch as <strong>OF-Models</strong> or <strong>TeraBox</strong>.</p>
+            <div class="actions" style="margin-top: 12px;">
+                <button id="sendOF" class="btn btn-primary" type="button">Send as OF-Models</button>
+                <button id="sendTera" class="btn btn-primary" type="button">Send as TeraBox</button>
+                <button id="cancelModal" class="btn btn-secondary" type="button">Cancel</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -154,8 +164,77 @@
             });
         }
 
-        // Run on load to set initial state
-        document.addEventListener('DOMContentLoaded', toggleFormMode);
+        // Modal control functions
+        function showModal() {
+            const modal = document.getElementById('confirmModal');
+            modal.classList.remove('hidden');
+            // trap focus on modal (basic)
+            const firstBtn = document.getElementById('sendOF');
+            firstBtn.focus();
+        }
+        function hideModal() {
+            const modal = document.getElementById('confirmModal');
+            modal.classList.add('hidden');
+        }
+
+        // Submit interception: if channel is OF-Models or TeraBox -> ask which to use
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('mainForm');
+            const channelSelect = document.getElementById('channel');
+
+            // keep behavior consistent on load
+            toggleFormMode();
+
+            form.addEventListener('submit', function(evt) {
+                const selected = channelSelect.value;
+                const needsChoice = (selected === 'OF-Models' || selected === 'TeraBox');
+
+                if (needsChoice) {
+                    // prevent immediate submit and show modal for choice
+                    evt.preventDefault();
+                    showModal();
+                }
+                // otherwise allow normal submit
+            });
+
+            // Modal button handlers
+            document.getElementById('sendOF').addEventListener('click', function() {
+                // set channel to OF-Models and submit
+                channelSelect.value = 'OF-Models';
+                // ensure form fields adjusted for chosen channel before submit
+                toggleFormMode();
+                hideModal();
+                // small timeout to ensure toggles apply before submit (not asynchronous work; immediate)
+                document.getElementById('mainForm').submit();
+            });
+
+            document.getElementById('sendTera').addEventListener('click', function() {
+                // set channel to TeraBox and submit
+                channelSelect.value = 'TeraBox';
+                toggleFormMode();
+                hideModal();
+                document.getElementById('mainForm').submit();
+            });
+
+            document.getElementById('cancelModal').addEventListener('click', function() {
+                hideModal();
+            });
+
+            // close modal if overlay is clicked (but not when clicking modal content)
+            document.getElementById('confirmModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideModal();
+                }
+            });
+
+            // Escape key to close modal
+            document.addEventListener('keydown', function(e) {
+                const modal = document.getElementById('confirmModal');
+                if (!modal.classList.contains('hidden') && e.key === 'Escape') {
+                    hideModal();
+                }
+            });
+        });
     </script>
 </body>
 </html>

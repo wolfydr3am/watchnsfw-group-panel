@@ -483,7 +483,7 @@ app.post('/process-bulk', upload.single('image'), async (req, res) => {
                     finalLink = entry.link;
                 } else {
                     // Other Channels (State-Snap, Amateur, Leaks-Vids): Label is title, link is the URL from input
-                    finalTitle = textLabeling.replace(/-/g, ' ');
+                    finalTitle = textLabeling.replace(/-/g, ' ').toUpperCase();
                     finalLink = entry.link;
                 }
 
