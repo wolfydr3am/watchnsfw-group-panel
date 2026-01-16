@@ -1,7 +1,7 @@
 {
     "WatchNSFW": {
         "Status": true,
-        "Telegram": false,
+        "Telegram": true,
         "Group": "-1002166006414",
         "name": "watchnsfw",
         "token": "4fd3320e831fd9d7ad80aaa02df71c158a1e137a765fd80e1988568d8514a11e",
@@ -31,13 +31,13 @@
         }
     },
     "HotBunny": {
-        "Status": false,
+        "Status": true,
         "Telegram": false,
         "Group": "",
         "name": "hotbunny",
         "token": "4fd3320e831fd9d7ad80aaa02df71c158a1e137a765fd80e1988568d8514a11e",
         "linkvertiseId": "1227907",
-        "lootlabsToken": "YOUR_LOOTLABS_API_TOKEN",
+        "lootlabsToken": "5154421495191f803fa1003eb9eb72acc71951164085529e805250e8aa7c9a55",
         "domain": "https://watchnsfw.co/s?",
         "background": "https://i.ibb.co/ggtQWXH/adbackground.png",
         "logo": "https://i.ibb.co/5TNfVks/Watch-NSFW-Static-Logo.png",
